@@ -156,7 +156,7 @@ def spend_points():
         else:
             return "Missing required field in request body.", 400
     except Exception as e:
-        print(e.with_traceback())
+        print(e)
         return "", 500
     
 @app.route("/balance", methods=['GET'])
@@ -174,7 +174,7 @@ def get_balance():
         return jsonify(user_balance), 200
 
     except Exception as e:
-        print(e.with_traceback())
+        print(e)
         return "", 500
 
 if __name__ == '__main__':
