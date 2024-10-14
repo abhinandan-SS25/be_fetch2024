@@ -16,7 +16,25 @@ This project implements an API for managing user points based on transactions fr
 -  **View user balance** per payer to track the current points status.
 
   
+## Testing
 
+`main` branch does not have any prepopulated data. The provided json file that acts as the databse with TinyDB has some prepolutated data already which may be used for testing. You will find it in the `testing` branch. Checkout the branch using `git checkout testing`.
+
+1. These payloads have been called on /add endpoint to add data
+- `{ "payer": "DANNON", "points": 300, "timestamp": "2022-10-31T10:00:00Z" }`
+- `{ "payer": "UNILEVER", "points": 200, "timestamp": "2022-10-31T11:00:00Z" }`
+- `{ "payer": "DANNON", "points": -200, "timestamp": "2022-10-31T15:00:00Z" }`
+- `{ "payer": "MILLER COORS", "points": 10000, "timestamp": "2022-11-01T14:00:00Z" }`
+- `{ "payer": "DANNON", "points": 1000, "timestamp": "2022-11-02T14:00:00Z" }`
+
+2. Spend points using /spend to deduct points
+- `{ "points": 5000 }`
+- The expected response should be 
+`[ { "payer": "DANNON", "points": -100 }, { "payer": "UNILEVER", "points": -200 }, { "payer": "MILLER COORS", "points": -4700 } ]`
+
+3. Visiting the /balance endpoint
+- The expected response should be
+`{ "DANNON": 1000, "UNILEVER" : 0, "MILLER COORS": 5300 }`
 
 ## Prerequisites To run this program, you need the following: 
 
